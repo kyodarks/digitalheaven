@@ -1,0 +1,134 @@
+@font-face {
+    font-family: "Roboto";
+    src: url("../fonts/Roboto.ttf");
+}
+
+@font-face {
+    font-family: "Roboto Bold";
+    src: url("../fonts/Roboto-Bold.ttf");
+}
+
+@font-face {
+    font-family:  "Roboto SemiBold";
+    src : url("../fonts/Roboto-SemiBold.ttf");
+}
+
+.root{
+    background-color: transparent;
+    -fx-background-color : linear-gradient(from 0% 0% to 100% 100%, #f5f2ea 0%, #d9d6cd 100%)/**/;
+    -fx-background-radius : 1.5em;
+}
+
+.container{
+    background-color: #fff;
+    -fx-background-color : #fff;
+}
+
+.label{
+    font-family : "Roboto";
+    -fx-font-family: "Roboto";
+}
+
+.text-field{
+    border-color : balck;
+    background-color : #fff;
+    border-radius: .7em;
+    font-family : "Roboto";
+    font-size : 16px;
+
+    -fx-background-color : #fff;
+    -fx-background-radius : .7em;
+    -fx-border-radius : .7em;
+    -fx-border-color : rgba(0, 0, 0, .2);
+
+    -fx-font-family: "Roboto";
+    -fx-font-size : 16px
+}
+
+.password-field{
+    font-family : "System";
+    font-size : 14px;
+
+    -fx-font-family : "System";
+    -fx-font-size : 14px;
+}
+
+.text-field:focused{
+    border-color : #000;
+
+    -fx-border-color : #000;
+}
+
+.hyperlink{
+    font-family : "Roboto";
+    border-color : transparent;
+
+    -fx-text-fill : black;
+    -fx-font-family : "Roboto";
+    -fx-underline : "false";
+    -fx-border-color : transparent;
+}
+
+.hyperlink:hover{
+    -fx-underline : "true";
+}
+
+.button{
+    font-family : "Roboto";
+    background-color:  #fdc886;
+    border-radius: .7em;
+    font-size : 16px;
+
+    -fx-background-color : #fdc886;
+    -fx-font-family : "Roboto";
+    -fx-background-radius : .7em;
+    -fx-border-radius: .7em;
+}
+
+.button:hover{
+    background-color :  rgb(227, 180, 118);
+
+    -fx-background-color : rgb(227, 180, 118);
+}
+
+.button-cancel{
+    background-color : transparent;
+    border-width : 1px;
+    border-color : rgba(0,0,0, .2);
+
+    -fx-background-color : transparent;
+    -fx-border-width : 1px;
+    -fx-border-color : rgba(0,0,0, .2);
+}
+
+.button-cancel:hover{
+    background-color : transparent;
+
+    -fx-background-color : #f1f1f1;
+}
+
+.button#loginButton{
+    font-family : "Roboto Bold";
+    font-size : 16px;
+
+    -fx-font-size : 16px;
+    -fx-font-family : "Roboto Bold";
+}
+
+.bold-text{
+    font-family:  "Roboto Bold";
+
+    -fx-font-family : "Roboto Bold";
+}
+
+.semibold-text{
+    font-family : "Roboto SemiBold";
+
+    -fx-font-family : "Roboto SemiBold";
+}
+
+.digitBox{
+    font-size : 23px;
+
+    -fx-font-size : 23px;
+}

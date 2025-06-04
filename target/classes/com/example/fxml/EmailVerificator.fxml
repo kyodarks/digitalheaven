@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<fx:root prefHeight="537.0" prefWidth="403.0" style="-fx-background-radius: 3em;" styleClass="container" stylesheets="@../css/theme.css" type="Pane" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button id="loginButton" fx:id="loginButton" layoutX="56.5" layoutY="398.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="290.0" text="Verify">
+         <font>
+            <Font size="16.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Label fx:id="title" alignment="CENTER" layoutX="56.5" layoutY="43.0" prefHeight="40.0" prefWidth="290.0" styleClass="bold-text" text="Email verification">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="label" alignment="CENTER" contentDisplay="CENTER" layoutX="61.0" layoutY="112.0" prefHeight="64.0" prefWidth="280.0" text="We've sent a code to the email you entered, enter it below to verify your account." textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <HBox alignment="CENTER" layoutY="263.0" prefHeight="45.0" prefWidth="403.0" spacing="7.0">
+         <children>
+            <TextField fx:id="d1" alignment="CENTER" prefHeight="45.0" prefWidth="45.0" styleClass="digitBox" />
+            <TextField fx:id="d2" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="45.0" prefWidth="45.0" styleClass="digitBox" />
+            <TextField fx:id="d3" alignment="CENTER" layoutX="50.0" layoutY="10.0" prefHeight="45.0" prefWidth="45.0" styleClass="digitBox" />
+            <TextField fx:id="d4" alignment="CENTER" layoutX="90.0" layoutY="10.0" prefHeight="45.0" prefWidth="45.0" styleClass="digitBox" />
+            <TextField fx:id="d5" alignment="CENTER" layoutX="130.0" layoutY="10.0" prefHeight="45.0" prefWidth="45.0" styleClass="digitBox" />
+            <TextField fx:id="d6" alignment="CENTER" layoutX="170.0" layoutY="10.0" prefHeight="45.0" prefWidth="45.0" styleClass="digitBox" />
+         </children>
+      </HBox>
+      <Button id="loginButton" fx:id="loginButton1" layoutX="56.0" layoutY="454.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="290.0" styleClass="button-cancel" text="Skip">
+         <font>
+            <Font size="16.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Label layoutX="50.0" layoutY="324.0" text="Didn't receive it?" />
+      <Hyperlink layoutX="136.0" layoutY="321.0" styleClass="semibold-text" text="Resend code" />
+   </children>
+</fx:root>
