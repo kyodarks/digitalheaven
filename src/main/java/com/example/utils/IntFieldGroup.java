@@ -19,6 +19,20 @@ public class IntFieldGroup {
         for (int i = 0; i < fields.length; i++){
             final int index = i;
             CharField field = fields[index];
+
+            field.getField().setOnKeyPressed(e->{
+                String s = field.getField().getText();
+                if (s.isBlank() 
+                    && field.getValue() == 0
+                    && field.getField().getCaretPosition() == 0
+                    && index != 0
+                    && e.getCode().toString().equals("BACK_SPACE")){
+                        CharField x = fields[index-1];
+                        x.getField().requestFocus();
+                        x.getField().positionCaret(1);
+                    }
+            });
+
             field.getField().textProperty().addListener((o, oo, b)->{
                 if (b.equals(field.getValue()+"")){return;}
                 if (b.isBlank()){field.setValue("");}
@@ -49,6 +63,36 @@ public class IntFieldGroup {
         return "";
     }
 
+    public void setErrorStyle(){
+        for (CharField x : fields) {
+            x.getField().getStyleClass().add("error-field");
+        }
+    }
+
+    public void removeErrorStyle(){
+        for (CharField x : fields) {
+            x.getField().getStyleClass().remove("error-field");
+        }
+    }
+
+    public void resetInput(){
+        for (CharField field : fields){
+            field.getField().setText("");
+        }
+    }
+
+    public int getValue(){
+        char[] value = new char[fields.length];
+
+        for (int i = 0; i < value.length; i++) {
+            CharField field = fields[i];
+
+            value[i] = Integer.toString(field.getValue()).charAt(0);
+        }
+        
+        return Integer.parseInt(String.valueOf(value));
+    }
+
     private static class CharField{
         private TextField field;
         private int value;
@@ -68,5 +112,4 @@ public class IntFieldGroup {
             return true;
         }
     }
-
-}
+}   

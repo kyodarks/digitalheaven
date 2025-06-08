@@ -11,7 +11,7 @@
 
 <fx:root prefHeight="537.0" prefWidth="403.0" style="-fx-background-radius: 3em;" styleClass="container" stylesheets="@../css/theme.css" type="Pane" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button id="loginButton" fx:id="loginButton" layoutX="56.5" layoutY="398.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="290.0" text="Verify">
+      <Button id="loginButton" fx:id="verifyButton" layoutX="56.5" layoutY="398.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="290.0" text="Verify">
          <font>
             <Font size="16.0" />
          </font>
@@ -39,7 +39,7 @@
             <TextField fx:id="d6" alignment="CENTER" layoutX="170.0" layoutY="10.0" prefHeight="45.0" prefWidth="45.0" styleClass="digitBox" />
          </children>
       </HBox>
-      <Button id="loginButton" fx:id="loginButton1" layoutX="56.0" layoutY="454.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="290.0" styleClass="button-cancel" text="Skip">
+      <Button id="loginButton" fx:id="skipButton" layoutX="56.0" layoutY="454.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="290.0" styleClass="button-cancel" text="Skip">
          <font>
             <Font size="16.0" />
          </font>
@@ -48,6 +48,6 @@
          </cursor>
       </Button>
       <Label layoutX="50.0" layoutY="324.0" text="Didn't receive it?" />
-      <Hyperlink layoutX="136.0" layoutY="321.0" styleClass="semibold-text" text="Resend code" />
+      <Hyperlink fx:id="resendCode" layoutX="136.0" layoutY="321.0" styleClass="semibold-text" text="Resend code" />
    </children>
 </fx:root>

@@ -21,6 +21,23 @@ public class Login extends Pane{
         setView(loginHandler);
     }
 
+    public void setView(FormView view){
+        container.getChildren().clear();
+        view.clearInput();
+        container.getChildren().add((Pane) view);
+    }
+
+    private void makeConnections(){
+        loginHandler.gotoSignup.setOnMouseClicked(e->{setView(signupHandler);});
+        loginHandler.passwordRecoveryButton.setOnMouseClicked(e->{setView(passwordRecoveryHandler);});
+        signupHandler.gotoLogin.setOnMouseClicked(e->{setView(loginHandler);});
+        passwordRecoveryHandler.gotoLogin.setOnMouseClicked(e->{setView(loginHandler);});
+    }
+
+    public LoginHandler getLoginHandler(){return loginHandler;}
+    public SignupHandler getSignupHandler(){return signupHandler;}
+    public PasswordRecoveryHandler getPasswordRecoveryHandler(){return passwordRecoveryHandler;}
+    
     private void initUI(){
         loginHandler = new LoginHandler();
         signupHandler = new SignupHandler();
@@ -35,18 +52,5 @@ public class Login extends Pane{
         try{
             loader.load();
         }catch (IOException e){}
-    }
-
-    public void setView(FormView view){
-        container.getChildren().clear();
-        view.clearInput();
-        container.getChildren().add((Pane) view);
-    }
-
-    private void makeConnections(){
-        loginHandler.gotoSignup.setOnMouseClicked(e->{setView(signupHandler);});
-        loginHandler.passwordRecoveryButton.setOnMouseClicked(e->{setView(passwordRecoveryHandler);});
-        signupHandler.gotoLogin.setOnMouseClicked(e->{setView(loginHandler);});
-        passwordRecoveryHandler.gotoLogin.setOnMouseClicked(e->{setView(loginHandler);});
     }
 }

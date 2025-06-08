@@ -9,6 +9,7 @@ import java.io.IOException;
 
 import com.example.controller.AppContainer;
 import com.example.controller.Login;
+import com.example.utils.DataBase;
 import com.example.utils.EmailSender;
 
 public class App extends Application {
@@ -39,8 +40,9 @@ public class App extends Application {
     
     private static void initStatic(){
         emailSender = new EmailSender();
+        new DataBase();
     }
-    
+
     public static Login getLoginController(){return login;}
     public static EmailSender getSender(){return emailSender;}
 

@@ -1,7 +1,10 @@
 package com.example.controller;
 
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
@@ -10,10 +13,14 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 import com.example.App;
 import com.example.model.FormView;
+import com.example.utils.DataBase;
 import com.example.utils.IntFieldGroup;
+import com.example.utils.PopupMessage;
 import com.example.utils.TOTPAuth;
 
 import jakarta.mail.MessagingException;
@@ -27,8 +34,20 @@ public class EmailVerificator extends Pane implements FormView{
     @FXML private TextField d5;
     @FXML private TextField d6;
 
+    @FXML private Button verifyButton;
+    @FXML private Button skipButton;
+    @FXML private Hyperlink resendCode;
+
     private final TOTPAuth authenticator;
     private final IntFieldGroup codeInput;
+    private final PopupMessage warnMessage;
+    private final PopupMessage infoMessage;
+    private final PopupMessage verificationSuccessMessage;
+
+    private final String verifyEmailSQL;
+
+    private Task<Void> codeCooldown;
+
     private String emailTarget;
     private String htmlContent;
 
@@ -39,6 +58,13 @@ public class EmailVerificator extends Pane implements FormView{
 
         authenticator = new TOTPAuth(180);
         codeInput = new IntFieldGroup(new TextField[]{d1,d2,d3,d4,d5,d6});
+        warnMessage = new PopupMessage(this, "Are you sure? you wont be able to recover your account", 3);
+        infoMessage = new PopupMessage(this, "", 3);
+        verificationSuccessMessage = new PopupMessage(this, "Account registered!", 3);
+
+        verifyEmailSQL = "UPDATE users SET verified = TRUE WHERE email = ?";
+
+        makeConnections();
     }
     
     public void setTarget(String email){
@@ -46,6 +72,50 @@ public class EmailVerificator extends Pane implements FormView{
         label.setText(String.format(
             "We've sent a code to %s, enter it below to verify your account.", 
             emailTarget));
+    }
+
+    private void makeConnections(){
+        verifyButton.setOnMouseClicked(e->{
+            boolean correct = authenticator.verify(codeInput.getValue()+"");
+            if(correct){
+                codeInput.removeErrorStyle();
+
+                try{
+                    PreparedStatement statement = DataBase.getConnection().prepareStatement(verifyEmailSQL);
+                    statement.setString(1, emailTarget);
+
+                    statement.executeUpdate();
+            }   catch(SQLException ex){}
+
+                verificationSuccessMessage.setMessage("Verification success!");
+                verificationSuccessMessage.show();
+            }else{
+                infoMessage.setMessage("Sorry, that's not the code :(");
+                infoMessage.show();
+                codeInput.setErrorStyle();
+            }
+        });
+
+        skipButton.setOnMouseClicked(e->{
+            warnMessage.show();
+        });
+
+        resendCode.setOnMouseClicked(e->{
+            sendCode();
+        });
+
+        warnMessage.addOption("Yes", "button-cancel", e->{
+            warnMessage.hide();
+            verificationSuccessMessage.show();
+        });
+
+        verificationSuccessMessage.addOption("Go to login", "", e->{
+            Login loginController = App.getLoginController();
+
+            loginController.setView(loginController.getLoginHandler());
+        });
+        warnMessage.addOption("Cancel", "", e->warnMessage.hide());
+        infoMessage.addOption("Ok", "", e-> infoMessage.hide());
     }
 
     private void formatContent() throws FileNotFoundException{
@@ -65,12 +135,46 @@ public class EmailVerificator extends Pane implements FormView{
         }catch(IOException e){}
     }
 
+    private void startCooldown(){
+        codeCooldown = new Task<>(){
+            @Override
+            protected Void call() throws Exception{
+                for (int i = 30; i>= 1; i--){
+                    if (isCancelled()){break;}
+                    updateMessage(String.format("Resend code (%ds)", i));
+                    Thread.sleep(1000);
+                }
+                
+                if (!isCancelled()){
+                    resendCode.setText("Resend Code");
+                    resendCode.setDisable(false);
+                }
+
+                return null;
+            }
+        };
+
+        resendCode.textProperty().bind(codeCooldown.messageProperty());
+
+        Thread thread = new Thread(codeCooldown);
+        thread.setDaemon(true);
+        thread.start();
+    }
+
     public void sendCode(){
         try{
-            String code = authenticator.reserveCode();
+            String code = authenticator.getCode();
+            if (codeCooldown != null && codeCooldown.isRunning()) {
+                codeCooldown.cancel();
+            }
+
+            startCooldown();
+            resendCode.setDisable(true);
+
             App.getSender().send(
                 emailTarget, "Digital Heaven Verification [" + code + "]", 
                 String.format(htmlContent, code));
+
         }catch(MessagingException e){e.printStackTrace();}
     }
 
@@ -79,7 +183,10 @@ public class EmailVerificator extends Pane implements FormView{
     }
 
     public void clearInput(){
-
+        emailTarget = "";
+        verificationSuccessMessage.hide();
+        codeInput.resetInput();
+        codeInput.removeErrorStyle();
     }
 
     private void initUI(){

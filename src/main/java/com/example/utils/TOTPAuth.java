@@ -1,5 +1,6 @@
 package com.example.utils;
 
+import java.net.URISyntaxException;
 import java.time.Duration;
 
 import com.bastiaanjansen.otp.HMACAlgorithm;
@@ -22,8 +23,12 @@ public class TOTPAuth {
         .build();
     }
 
-    public String reserveCode(){
+    public String getCode(){
         return generator.now();
+    }
+
+    public String getAuthURI(String user) throws URISyntaxException{
+        return generator.getURI("Digital Heaven", user).toString();
     }
 
     public boolean verify(String code){return generator.verify(code);}
