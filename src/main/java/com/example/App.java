@@ -9,6 +9,8 @@ import java.io.IOException;
 
 import com.example.controller.AppContainer;
 import com.example.controller.Login;
+import com.example.controller.MainApplication;
+import com.example.controller.WelcomeMessage;
 import com.example.utils.DataBase;
 import com.example.utils.EmailSender;
 
@@ -16,12 +18,15 @@ public class App extends Application {
     private static Scene scene;
     private static AppContainer appContainer;
     private static Login login;
+    private static MainApplication mainApplication;
+    private static WelcomeMessage welcomeMessage;
     private static EmailSender emailSender;
 
     @Override
     public void start(Stage stage) throws IOException {
         initStatic();
         initUI(stage);
+        makeConnections();
     }
 
     private static void initUI(Stage stage){
@@ -40,7 +45,22 @@ public class App extends Application {
     
     private static void initStatic(){
         emailSender = new EmailSender();
+        welcomeMessage = new WelcomeMessage();
+        mainApplication = new MainApplication();
         new DataBase();
+    }
+
+    private static void makeConnections(){
+        welcomeMessage.setOnFinished(e->{
+            appContainer.setView(mainApplication);
+            mainApplication.enter();
+        });
+    }
+
+    public static void enterProgram(String userid){
+        welcomeMessage.setUserID(userid);
+        appContainer.setView(welcomeMessage);
+        welcomeMessage.play();
     }
 
     public static Login getLoginController(){return login;}

@@ -34,13 +34,19 @@ public class EmailSender {
         });
     }
 
-    public void send(String target, String subject, String content) throws MessagingException {
-        Message message = new MimeMessage(session);
-        message.setFrom(new InternetAddress(target));
-        message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(target));
-        message.setSubject(subject);
-        message.setContent(content, "text/html; charset=utf-8");
+    public void send(String target, String subject, String content){
+        Runnable thread = ()->{
+            try{
+                Message message = new MimeMessage(session);
+                message.setFrom(new InternetAddress(target));
+                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(target));
+                message.setSubject(subject);
+                message.setContent(content, "text/html; charset=utf-8");
 
-        Transport.send(message);
+                Transport.send(message);
+            }catch(MessagingException e){}
+        };
+
+        thread.run();
     }
 }

@@ -23,7 +23,7 @@
       </Button>
       <Hyperlink fx:id="passwordRecoveryButton" layoutX="57.0" layoutY="362.0" text="Forgot password?" />
       <Label layoutX="65.5" layoutY="285.0" text="Password" />
-      <Label layoutX="66.0" layoutY="213.0" text="User" />
+      <Label layoutX="66.0" layoutY="213.0" text="User or email" />
       <Label fx:id="invalidUserLabel" alignment="CENTER_RIGHT" layoutX="194.0" layoutY="213.0" prefHeight="17.0" prefWidth="140.0" text="Invalid user*" textFill="#ff3f3f" visible="false" />
       <Label fx:id="invalidPasswordLabel" alignment="CENTER_RIGHT" layoutX="194.0" layoutY="285.0" prefHeight="17.0" prefWidth="140.0" text="Invalid password*" textFill="#ff3f3f" visible="false" />
       <Pane layoutX="107.0" layoutY="473.0">

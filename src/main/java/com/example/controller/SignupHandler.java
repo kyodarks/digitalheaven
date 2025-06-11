@@ -9,6 +9,7 @@ import com.example.App;
 import com.example.model.FormView;
 import com.example.utils.PopupMessage;
 import com.example.utils.DataBase;
+import com.example.utils.FormInputGroup;
 import com.example.utils.EmailValidator;
 
 import javafx.fxml.FXML;
@@ -145,7 +146,8 @@ public class SignupHandler extends Pane implements FormView{
 
                 statement.executeUpdate();
             }catch(SQLException ex){}
-
+             
+            for (FormInputGroup x : inputs){x.clear();}
             App.getLoginController().setView(emailVerificator);
             emailVerificator.setTarget(email);
             emailVerificator.sendCode();
@@ -174,23 +176,5 @@ public class SignupHandler extends Pane implements FormView{
         }catch (IOException e){}
 
         errorMessage = new PopupMessage(this, "", 3);
-    }
-
-    private static class FormInputGroup {
-        private Label label;
-        private TextField input;
-
-        public FormInputGroup(TextField input, Label message){
-            this.input = input;
-            this.label = message;
-        }
-
-        public Label getLabel(){return label;}
-        public TextField getInput(){return input;}
-        public void clear(){
-            input.clear();
-            input.getStyleClass().remove("error-field");
-            label.setVisible(false);
-        }
     }
 }

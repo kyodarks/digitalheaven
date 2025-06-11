@@ -1,6 +1,9 @@
 com\example\controller\EmailVerificator.class
 com\example\utils\EasingStyle.class
+com\example\controller\WelcomeMessage.class
 com\example\utils\EmailSender$1.class
+com\example\utils\FormInputGroup.class
+com\example\controller\MainApplication.class
 com\example\model\FormView.class
 com\example\App.class
 com\example\controller\SignupHandler.class
@@ -18,4 +21,3 @@ com\example\utils\TOTPAuth.class
 com\example\utils\PopupMessage.class
 com\example\utils\DataBase.class
 com\example\utils\EmailValidator.class
-com\example\controller\SignupHandler$FormInputGroup.class

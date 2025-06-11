@@ -2,6 +2,7 @@ C:\Users\dsblo\OneDrive\Documentos\JavaProjects\lol\src\main\java\com\example\co
 C:\Users\dsblo\OneDrive\Documentos\JavaProjects\lol\src\main\java\com\example\App.java
 C:\Users\dsblo\OneDrive\Documentos\JavaProjects\lol\src\main\java\com\example\utils\TOTPAuth.java
 C:\Users\dsblo\OneDrive\Documentos\JavaProjects\lol\src\main\java\com\example\utils\IntFieldGroup.java
+C:\Users\dsblo\OneDrive\Documentos\JavaProjects\lol\src\main\java\com\example\controller\MainApplication.java
 C:\Users\dsblo\OneDrive\Documentos\JavaProjects\lol\src\main\java\com\example\controller\Login.java
 C:\Users\dsblo\OneDrive\Documentos\JavaProjects\lol\src\main\java\com\example\model\FormView.java
 C:\Users\dsblo\OneDrive\Documentos\JavaProjects\lol\src\main\java\com\example\controller\PasswordRecoveryHandler.java
@@ -11,5 +12,7 @@ C:\Users\dsblo\OneDrive\Documentos\JavaProjects\lol\src\main\java\com\example\co
 C:\Users\dsblo\OneDrive\Documentos\JavaProjects\lol\src\main\java\com\example\controller\LoginHandler.java
 C:\Users\dsblo\OneDrive\Documentos\JavaProjects\lol\src\main\java\com\example\utils\EmailSender.java
 C:\Users\dsblo\OneDrive\Documentos\JavaProjects\lol\src\main\java\com\example\utils\EmailValidator.java
+C:\Users\dsblo\OneDrive\Documentos\JavaProjects\lol\src\main\java\com\example\utils\FormInputGroup.java
+C:\Users\dsblo\OneDrive\Documentos\JavaProjects\lol\src\main\java\com\example\controller\WelcomeMessage.java
 C:\Users\dsblo\OneDrive\Documentos\JavaProjects\lol\src\main\java\com\example\utils\PopupMessage.java
 C:\Users\dsblo\OneDrive\Documentos\JavaProjects\lol\src\main\java\com\example\utils\EasingStyle.java

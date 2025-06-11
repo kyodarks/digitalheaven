@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<fx:root prefHeight="716" prefWidth="1008" stylesheets="@../css/theme.css" type="Pane" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox alignment="CENTER" prefHeight="716.0" prefWidth="1008.0" spacing="5.0">
+         <children>
+            <Label fx:id="welcomeMessage" text="Welcome @Kyo">
+               <font>
+                  <Font size="34.0" />
+               </font>
+            </Label>
+            <HBox fx:id="submessage" alignment="CENTER" prefWidth="200.0" spacing="5.0">
+               <children>
+                  <Label text="Status:">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="status" text="Admin">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</fx:root>

@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +14,9 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.example.App;
@@ -22,8 +25,6 @@ import com.example.utils.DataBase;
 import com.example.utils.IntFieldGroup;
 import com.example.utils.PopupMessage;
 import com.example.utils.TOTPAuth;
-
-import jakarta.mail.MessagingException;
 
 public class EmailVerificator extends Pane implements FormView{
     @FXML private Label label;
@@ -45,6 +46,7 @@ public class EmailVerificator extends Pane implements FormView{
     private final PopupMessage verificationSuccessMessage;
 
     private final String verifyEmailSQL;
+    private final String getUserFromEmailSQL;
 
     private Task<Void> codeCooldown;
 
@@ -62,7 +64,8 @@ public class EmailVerificator extends Pane implements FormView{
         infoMessage = new PopupMessage(this, "", 3);
         verificationSuccessMessage = new PopupMessage(this, "Account registered!", 3);
 
-        verifyEmailSQL = "UPDATE users SET verified = TRUE WHERE email = ?";
+        verifyEmailSQL = "UPDATE users SET verified = TRUE, authURI = ? WHERE userid = ?";
+        getUserFromEmailSQL = "SELECT userid, username FROM users WHERE email = ?";
 
         makeConnections();
     }
@@ -81,11 +84,34 @@ public class EmailVerificator extends Pane implements FormView{
                 codeInput.removeErrorStyle();
 
                 try{
-                    PreparedStatement statement = DataBase.getConnection().prepareStatement(verifyEmailSQL);
-                    statement.setString(1, emailTarget);
+                    PreparedStatement getUserStatement = DataBase
+                    .getConnection()
+                    .prepareStatement(getUserFromEmailSQL);
 
-                    statement.executeUpdate();
-            }   catch(SQLException ex){}
+                    getUserStatement.setString(1, emailTarget);
+                    ResultSet result = getUserStatement.executeQuery();
+                    boolean success = result.next();
+
+                    if (!success){
+                        infoMessage.setMessage("Sorry, something went wrong :( ");
+                        infoMessage.show();
+                        
+                        return;
+                    }
+
+                    PreparedStatement verifyStatement = DataBase
+                    .getConnection().
+                    prepareStatement(verifyEmailSQL);
+                    String auth = "";
+
+                    try{
+                        auth = authenticator.getAuthURI(result.getString(2));
+                    }catch(URISyntaxException x){}
+
+                    verifyStatement.setString(1, auth);
+                    verifyStatement.setString(2, result.getString(1));
+                    verifyStatement.executeUpdate();
+                }catch(SQLException ex){}
 
                 verificationSuccessMessage.setMessage("Verification success!");
                 verificationSuccessMessage.show();
@@ -101,6 +127,7 @@ public class EmailVerificator extends Pane implements FormView{
         });
 
         resendCode.setOnMouseClicked(e->{
+            resendCode.setDisable(true);
             sendCode();
         });
 
@@ -146,8 +173,12 @@ public class EmailVerificator extends Pane implements FormView{
                 }
                 
                 if (!isCancelled()){
-                    resendCode.setText("Resend Code");
-                    resendCode.setDisable(false);
+                    System.out.println("countdown finished!!!!!!");
+                    Platform.runLater(()->{
+                        resendCode.textProperty().unbind();
+                        resendCode.setText("Resend Code");
+                        resendCode.setDisable(false);
+                    });
                 }
 
                 return null;
@@ -162,20 +193,18 @@ public class EmailVerificator extends Pane implements FormView{
     }
 
     public void sendCode(){
-        try{
-            String code = authenticator.getCode();
-            if (codeCooldown != null && codeCooldown.isRunning()) {
-                codeCooldown.cancel();
-            }
+        String code = authenticator.getCode();
+        if (codeCooldown != null && codeCooldown.isRunning()) {
+             codeCooldown.cancel();
+        }
 
-            startCooldown();
-            resendCode.setDisable(true);
+        startCooldown();
+        resendCode.setDisable(true);
 
-            App.getSender().send(
-                emailTarget, "Digital Heaven Verification [" + code + "]", 
-                String.format(htmlContent, code));
-
-        }catch(MessagingException e){e.printStackTrace();}
+        App.getSender().send(
+            emailTarget, "Digital Heaven Verification [" + code + "]", 
+            String.format(htmlContent, code));
+        
     }
 
     public boolean verify(String code){
