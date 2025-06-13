@@ -24,9 +24,20 @@
     -fx-background-color : #fff;
 }
 
+.rounded-container{
+    border-radius : 1.5em;
+
+    -fx-border-radius : 1.5em;
+    -fx-background-radius : 1.5em;
+}
+
 .label{
     font-family : "Roboto";
     -fx-font-family: "Roboto";
+}
+
+.label-deselected{
+    -fx-text-fill : rgba(0, 0, 0, .5);
 }
 
 .success-label{
@@ -179,4 +190,70 @@
     border-width : 0px;
 
     -fx-border-width : 0px;
+}
+
+.submenu-container{
+    background-color : #fff;
+
+    -fx-background-color : #fff;
+}
+
+.submenu-button-selected{
+    background-color : #fdc886;
+
+    -fx-background-color : #fdc886;
+    -fx-background-radius : .5em;
+}
+
+.category-button{
+    border-color : #66ec9c;
+    background-color : #66ec9c;
+    border-width : 1px;
+    border-radius : 1.5em;
+
+    -fx-border-color : #66ec9c;
+    -fx-background-color : rgba(102, 236, 156, .1);
+    -fx-background-radius : 1.5em;
+    -fx-text-fill : #66ec9c;
+    -fx-border-radius : 1.5em;
+    -fx-border-width : 1px;
+}
+
+.category-button:hover{
+    background-color : #66ec9c;
+
+    -fx-background-color : rgba(102, 236, 156, .15);
+}
+
+.category-button-selected{
+    background-color : #66ec9c;
+
+    -fx-background-color : #66ec9c;
+    -fx-text-fill : white;
+}
+
+.category-button-selected:hover{
+    background-color : #66ec9c;
+
+    -fx-background-color : #66ec9c;
+}
+
+.searchbar{
+    border-color : rgba(0,0,0 .1);
+    border-radius : 1em;
+    border-width : 2px;
+
+    -fx-border-radius : 2em;
+    -fx-border-width : 1px;
+    -fx-border-color : rgba(0,0,0 .1);
+}
+
+.searchbar-field{
+    background-color: transparent;
+    border-width : 0px;
+    font-size : 14px;
+
+    -fx-background-color : transparent;
+    -fx-border-width : 0px;
+    -fx-font-size : 14px
 }

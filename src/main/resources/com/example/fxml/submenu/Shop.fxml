@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<fx:root prefHeight="692" prefWidth="794" styleClass="submenu-container" stylesheets="@../../css/theme.css" type="StackPane" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <VBox prefHeight="677.0" prefWidth="769.0" spacing="15.0">
+               <children>
+                  <Label fx:id="test" styleClass="semibold-text" text="Catalog">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <HBox prefWidth="769.0" spacing="10.0">
+                     <children>
+                        <Pane prefHeight="600.0" prefWidth="150.0">
+                           <effect>
+                              <DropShadow height="25.24" offsetX="2.0" offsetY="3.0" radius="11.059999999999999">
+                                 <color>
+                                    <Color opacity="0.15000000596046448" />
+                                 </color>
+                              </DropShadow>
+                           </effect>
+                           <styleClass>
+                              <String fx:value="container" />
+                              <String fx:value="rounded-container" />
+                           </styleClass></Pane>
+                        <Pane prefHeight="200.0" prefWidth="600.0">
+                           <children>
+                              <VBox prefWidth="600.0">
+                                 <children>
+                                    <HBox prefWidth="200.0" spacing="20.0">
+                                       <children>
+                                          <Button minWidth="45.0" mnemonicParsing="false" text="All">
+                                             <styleClass>
+                                                <String fx:value="category-button" />
+                                                <String fx:value="semibold-text" />
+                                                <String fx:value="category-button-selected" />
+                                             </styleClass>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </Button>
+                                          <Button layoutX="10.0" layoutY="10.0" minWidth="45.0" mnemonicParsing="false" text="Giftcard">
+                                             <styleClass>
+                                                <String fx:value="category-button" />
+                                                <String fx:value="semibold-text" />
+                                             </styleClass>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </Button>
+                                          <Button layoutX="62.0" layoutY="10.0" minWidth="45.0" mnemonicParsing="false" text="Skin">
+                                             <styleClass>
+                                                <String fx:value="category-button" />
+                                                <String fx:value="semibold-text" />
+                                             </styleClass>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </Button>
+                                          <Button layoutX="114.0" layoutY="10.0" minWidth="45.0" mnemonicParsing="false" text="Product">
+                                             <styleClass>
+                                                <String fx:value="category-button" />
+                                                <String fx:value="semibold-text" />
+                                             </styleClass>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </Button>
+                                          <Button layoutX="166.0" layoutY="10.0" minWidth="45.0" mnemonicParsing="false" text="Licence">
+                                             <styleClass>
+                                                <String fx:value="category-button" />
+                                                <String fx:value="semibold-text" />
+                                             </styleClass>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </Button>
+                                          <Pane prefHeight="28.0" prefWidth="200.0" styleClass="searchbar">
+                                             <children>
+                                                <TextField layoutX="28.0" maxHeight="28.0" prefHeight="28.0" prefWidth="165.0" promptText="Buscar..." styleClass="searchbar-field">
+                                                   <font>
+                                                      <Font size="11.0" />
+                                                   </font>
+                                                </TextField>
+                                             </children>
+                                          </Pane>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </Pane>
+                     </children>
+                     <padding>
+                        <Insets top="10.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+         <StackPane.margin>
+            <Insets />
+         </StackPane.margin>
+      </Pane>
+   </children>
+   <padding>
+      <Insets left="25.0" top="15.0" />
+   </padding>
+</fx:root>

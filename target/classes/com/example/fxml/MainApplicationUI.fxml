@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.embed.swing.SwingNode?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-
 
 <fx:root prefHeight="716" prefWidth="1008" stylesheets="@../css/theme.css" type="Pane" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Pane layoutX="200.0" layoutY="14.0" prefHeight="692.0" prefWidth="794.0" style="-fx-background-radius: 1.5em;" styleClass="container">
+      <Pane fx:id="submenuContainer" layoutX="200.0" layoutY="14.0" prefHeight="692.0" prefWidth="794.0" style="-fx-background-radius: 1.5em;" styleClass="container">
          <children>
             <Label disable="true" layoutX="345.0" layoutY="331.0" text="nothing to see...">
                <font>
@@ -16,5 +20,130 @@
             </Label>
          </children>
       </Pane>
+      <VBox prefHeight="716.0" prefWidth="200.0" spacing="2.0">
+         <padding>
+            <Insets left="15.0" right="20.0" top="15.0" />
+         </padding>
+         <children>
+            <Pane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="60.0" layoutY="93.0" text="appIcon" />
+               </children></Pane>
+            <HBox fx:id="homeButton" alignment="CENTER_LEFT" layoutX="25.0" layoutY="225.0" prefHeight="32.0" prefWidth="200.0" spacing="15.0">
+               <children>
+                  <SwingNode fx:id="homeIcon" blendMode="DARKEN" />
+                  <Label fx:id="homeLabel" styleClass="bold-text" text="Home">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="18.0" top="5.0" />
+               </padding>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </HBox>
+            <HBox fx:id="shopButton" alignment="CENTER_LEFT" layoutX="25.0" layoutY="225.0" prefHeight="32.0" prefWidth="200.0" spacing="15.0">
+               <children>
+                  <SwingNode fx:id="shopIcon" blendMode="DARKEN" />
+                  <Label fx:id="shopLabel" styleClass="bold-text" text="Catalog">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="18.0" top="5.0" />
+               </padding>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </HBox>
+            <HBox fx:id="dashboardButton" alignment="CENTER_LEFT" layoutX="25.0" layoutY="268.0" prefHeight="32.0" prefWidth="200.0" spacing="15.0">
+               <children>
+                  <SwingNode fx:id="dashboardIcon" blendMode="DARKEN" />
+                  <Label fx:id="dashboardLabel" styleClass="bold-text" text="Dashboard">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="18.0" top="5.0" />
+               </padding>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </HBox>
+            <HBox fx:id="historyButton" alignment="CENTER_LEFT" layoutX="25.0" layoutY="312.0" prefHeight="32.0" prefWidth="200.0" spacing="15.0">
+               <children>
+                  <SwingNode fx:id="historyIcon" blendMode="DARKEN" />
+                  <Label fx:id="historyLabel" styleClass="bold-text" text="History">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="18.0" top="5.0" />
+               </padding>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </HBox>
+            <HBox fx:id="profileButton" alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="200.0" spacing="15.0">
+               <children>
+                  <SwingNode fx:id="profileIcon" blendMode="DARKEN" />
+                  <Label fx:id="profileLabel" styleClass="bold-text" text="Profile">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="18.0" top="5.0" />
+               </padding>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </HBox>
+            <HBox fx:id="adminButton" alignment="CENTER_LEFT" layoutX="25.0" layoutY="410.0" prefHeight="32.0" prefWidth="200.0" spacing="15.0">
+               <children>
+                  <SwingNode fx:id="adminIcon" blendMode="DARKEN" />
+                  <Label fx:id="adminLabel" styleClass="bold-text" text="Admin">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="18.0" top="5.0" />
+               </padding>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </HBox>
+         </children>
+      </VBox>
    </children>
 </fx:root>
