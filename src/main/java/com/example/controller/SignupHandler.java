@@ -35,24 +35,22 @@ public class SignupHandler extends Pane implements FormView{
     private PopupMessage errorMessage;
     private FormInputGroup[] inputs;
 
-    private final String getUsersWithUserSQL;
-    private final String getUsersWithEmailSQL;
-    private final String addUserSQL;
+    private String getUsersWithUserSQL;
+    private String getUsersWithEmailSQL;
+    private String addUserSQL;
 
     public SignupHandler(){
         init();
         initUI();
-        inputs = new FormInputGroup[]{
-            new FormInputGroup(input_user, invalidUserLabel),
-            new FormInputGroup(input_email, invalidEmailLabel),
-            new FormInputGroup(input_password, invalidPasswordLabel)
-        };
+        initQuerys();
 
+        makeConnections();
+    }
+
+    private void initQuerys(){
         getUsersWithUserSQL = "SELECT userid FROM users WHERE username = ?";
         getUsersWithEmailSQL = "SELECT userid FROM users WHERE email = ?";
         addUserSQL = "INSERT INTO users (username, password, email) VALUES(?, ?, ?)";
-
-        makeConnections();
     }
 
     private void init(){
@@ -176,5 +174,10 @@ public class SignupHandler extends Pane implements FormView{
         }catch (IOException e){}
 
         errorMessage = new PopupMessage(this, "", 3);
+        inputs = new FormInputGroup[]{
+            new FormInputGroup(input_user, invalidUserLabel),
+            new FormInputGroup(input_email, invalidEmailLabel),
+            new FormInputGroup(input_password, invalidPasswordLabel)
+        };
     }
 }

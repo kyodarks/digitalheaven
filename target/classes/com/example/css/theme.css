@@ -108,7 +108,6 @@
     font-family : "Roboto";
     background-color:  #fdc886;
     border-radius: .7em;
-    font-size : 16px;
 
     -fx-background-color : #fdc886;
     -fx-font-family : "Roboto";
@@ -192,6 +191,18 @@
     -fx-border-width : 0px;
 }
 
+.product-data-input{
+    border-width : 1px;
+    border-style : dashed;
+    border-radius : .3em;
+    border-color : rgb(240,240,240);
+
+    -fx-border-width : 1px;
+    -fx-border-style : dashed;
+    -fx-border-radius : .3em;
+    -fx-border-color : rgb(210,210,210);
+}
+
 .submenu-container{
     background-color : #fff;
 
@@ -248,6 +259,96 @@
     -fx-border-color : rgba(0,0,0 .1);
 }
 
+.product-container{
+    background-color : rgba(0, 0, 0, .05);
+    border-width : 2px;
+    border-radius : 1.5em;
+    border-color : rgba(0, 0, 0, .1);
+
+    -fx-background-radius : 8%;
+    -fx-background-color : rgba(0, 0, 0, .05);
+    -fx-border-width : 2px;
+    -fx-border-radius : 8%;
+    -fx-border-color : rgba(0, 0, 0, .1)
+}
+
+.product-container .product-name{
+    font-size : 12px;
+
+    -fx-font-size : 12px
+}
+
+.product-container .product-cost{
+     font-size : 16px;
+
+    -fx-font-size : 16px;
+    -fx-text-fill : #40bf24;
+}
+
+.product-view{
+    background-color : rgba(0, 0, 0, .1);
+
+    -fx-background-color : rgba(0, 0, 0, .1);
+    -fx-background-radius : 8%;
+}
+
+.product-page-summary{
+    background-color : rgb(0, 0, 0, .025);
+    border-radius : 1em;
+    border-width : 2.5px;
+    border-color : rgba(0, 0, 0, .1);
+    
+    -fx-background-radius : 1em;   
+    -fx-background-color : rgb(0, 0, 0, .025);
+    -fx-border-radius : 1em;
+    -fx-border-width : 2.5px;
+    -fx-border-color : rgb(0, 0, 0, .1)
+}
+
+.text-area{
+    background-color : transparent;
+    font-family : "Roboto";
+    font-size : 24px;
+
+    -fx-font-family: "Roboto";
+    -fx-font-size : 24px;
+    -fx-background-color : transparent;
+}
+
+.text-area .content{
+    background-color : transparent;
+    padding : 0;
+
+    -fx-padding : 0;
+    -fx-background-color : transparent;
+}
+
+.product-cost-display{
+    background-color : transparent;
+    padding : 0;
+    font-size : 24;
+    border-width : 0px;
+    font-family : "Roboto";
+
+    -fx-background-color : transparent;
+    -fx-padding : 0px 0px 0px 5px;
+    -fx-font-size : 24px;
+    -fx-border-width : 0px;
+    -fx-text-fill : #40bf24;
+}
+
+.upload-file-container{
+    border-style: dashed;
+    border-radius : 1.5em;
+    border-color : black;
+    border-width : 2px;
+
+    -fx-border-style: segments(8, 15);;
+    -fx-border-radius : 1.5em;
+    -fx-border-color : black;
+    -fx-border-width : 2px;
+}
+
 .searchbar-field{
     background-color: transparent;
     border-width : 0px;
@@ -256,4 +357,118 @@
     -fx-background-color : transparent;
     -fx-border-width : 0px;
     -fx-font-size : 14px
+}
+
+.image-cropper-container{
+    background-color : white;
+
+    -fx-background-color : white;
+    -fx-background-radius : 1.5em;
+}
+
+.scroll-pane{
+    background-color : transparent;
+
+    -fx-background-color : transparent;
+}
+
+.scroll-pane .viewport{
+    background-color : transparent;
+
+    -fx-background-color : transparent;
+}
+
+.scroll-bar:vertical{
+    background-color : rgb(200, 200, 200);
+
+    -fx-background-color : transparent;
+}
+
+.scroll-bar:vertical > .thumb{
+    background-color : rgb(200, 200, 200);
+
+    -fx-background-color : rgb(200, 200, 200);
+}
+
+.scroll-bar:vertical .increment-button{
+    opacity : 0;
+
+    -fx-opacity : 0;
+}
+
+.scroll-bar:vertical .decrement-button{
+    opacity : 0;
+
+    -fx-opacity : 0;
+}
+
+.combo-box {
+    font-family : "Roboto";
+    background-color : transparent;
+    border-width : 0;
+
+    -fx-font-family : "Roboto";
+    -fx-background-color : transparent;
+    -fx-border-width : 0;
+}
+
+.combo-box .arrow-button {
+    background-color : transparent;
+    padding : 0.5em;
+
+    -fx-background-color : transparent;
+    -fx-padding : 0.5em;
+}
+
+.combo-box .arrow-button .arrow {
+    background-color : black;
+
+    -fx-background-color : black;
+}
+
+.combo-box .list-cell {
+    padding : 5px 10px 5px 10px;
+    background-color : black;
+    border-width : 0;
+    font-size : 15px;
+
+    -fx-padding : 5px 10px 5px 10px;
+    -fx-background-color : white;
+    -fx-border-width : 0;
+    -fx-background-radius : .2em;
+    -fx-font-size : 15px;
+    -fx-text-fill : black;
+}
+
+.combo-box .list-cell:hover {
+    background-color : rgb(230, 230, 230);
+
+    -fx-background-color: rgb(230, 230, 230);
+}
+
+.combo-box .list-cell:selected {
+    background-color : transparent;
+    font-family : "Roboto Bold";
+
+    -fx-background-color: transparent;
+    -fx-text-fill: #fdc886;
+    -fx-font-family : "Roboto Bold"
+}
+
+.combo-box-popup .list-view {
+    background-color : white;
+
+    -fx-background-color: white;
+}
+
+.combo-box-popup .scroll-bar:horizontal {
+    opacity : 0;
+    max-width : 0;
+    max-height : 0;
+
+    -fx-opacity: 0;
+    -fx-pref-width: 0;
+    -fx-pref-height: 0;
+    -fx-max-width: 0;
+    -fx-max-height: 0;
 }

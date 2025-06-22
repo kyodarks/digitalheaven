@@ -3,6 +3,8 @@ package com.example.controller.submenu;
 import java.io.IOException;
 
 import com.example.App;
+import com.example.controller.ReturnButton;
+import com.example.controller.submenuView.SubmenuView;
 import com.example.utils.EasingStyle;
 
 import javafx.animation.KeyFrame;
@@ -14,9 +16,15 @@ import javafx.util.Duration;
 
 public abstract class SubMenuController extends StackPane{
     private Timeline selectAnimation;
+    private ReturnButton returnButton;
+
+    private SubmenuView currentView;
 
     public SubMenuController(){
+        returnButton = new ReturnButton();
+
         initAnimation();
+        makeConnections();
     }
 
     public void playSelectAnimation(){
@@ -34,6 +42,30 @@ public abstract class SubMenuController extends StackPane{
                 new KeyValue(layoutXProperty(), 0, EasingStyle.OutSine),
                 new KeyValue(layoutYProperty(), 0, EasingStyle.OutSine))
         );
+    }
+
+    private void makeConnections(){
+        returnButton.setOnMouseClicked(e->{
+            removeView();
+        });
+    }
+
+    public void setView(SubmenuView view){
+        if (currentView != null){return;}
+        currentView = view;
+
+        view.getContent().getChildren().add(0, returnButton);
+        getChildren().add(view);
+    }
+
+    public void removeView(){
+        if (currentView == null){return;}
+        
+        currentView.getContent().getChildren().remove(returnButton);
+        getChildren().remove(currentView);
+        playSelectAnimation();
+
+        currentView = null;
     }
 
     public void initUI(String index){

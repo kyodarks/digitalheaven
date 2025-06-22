@@ -173,7 +173,6 @@ public class EmailVerificator extends Pane implements FormView{
                 }
                 
                 if (!isCancelled()){
-                    System.out.println("countdown finished!!!!!!");
                     Platform.runLater(()->{
                         resendCode.textProperty().unbind();
                         resendCode.setText("Resend Code");

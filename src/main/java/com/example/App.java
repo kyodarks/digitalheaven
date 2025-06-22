@@ -15,15 +15,19 @@ import com.example.utils.DataBase;
 import com.example.utils.EmailSender;
 
 public class App extends Application {
+    private static Stage stage;
     private static Scene scene;
     private static AppContainer appContainer;
     private static Login login;
     private static MainApplication mainApplication;
     private static WelcomeMessage welcomeMessage;
     private static EmailSender emailSender;
+    private static String userid;
 
     @Override
     public void start(Stage stage) throws IOException {
+        App.stage = stage;
+
         initStatic();
         initUI(stage);
         makeConnections();
@@ -61,6 +65,13 @@ public class App extends Application {
         welcomeMessage.setUserID(userid);
         appContainer.setView(welcomeMessage);
         welcomeMessage.play();
+        App.userid = userid;
+    }
+
+    public static Stage getStage(){return stage;}
+
+    public static String getUser(){
+        return userid;
     }
 
     public static Login getLoginController(){return login;}

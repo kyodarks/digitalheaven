@@ -13,6 +13,7 @@ import com.formdev.flatlaf.extras.FlatSVGIcon;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -29,14 +30,15 @@ public class MainApplication extends Pane{
     @FXML private Label profileLabel;
     @FXML private Pane submenuContainer;
 
-    private boolean submenusLoaded;
-
     private SubMenu selectedSubmenu;
     private SubMenu[] submenus;
     private Timeline initAnimation;
 
+    private boolean firtsJoin;
+
     public MainApplication(){
-        submenusLoaded = false;
+        firtsJoin = true;
+
         initUI();
         initAnimation();
     }
@@ -55,8 +57,10 @@ public class MainApplication extends Pane{
     }
 
     public void enter(){
-        if (!submenusLoaded){loadSubmenus();}
         initAnimation.play();
+        if (firtsJoin){
+            loadSubmenus();
+        }
     }
 
     private void initUI(){
@@ -95,7 +99,6 @@ public class MainApplication extends Pane{
         }
 
         switchMenu(submenus[0]);
-        submenusLoaded = true;
     }
 
     public void setView(Node view){
@@ -168,14 +171,18 @@ public class MainApplication extends Pane{
         }
         
         private void initIcon(){
-            SwingUtilities.invokeLater(() ->{
+            Platform.runLater(()->{
+                SwingUtilities.invokeLater(() ->{
+                    
+                });
+
                 icon = new FlatSVGIcon(
-                    "com/example/icons/"+name+".svg", 20, 20);
+                        "com/example/icons/"+name+".svg", 20, 20);
                 JLabel label = new JLabel(icon);
                 label.setOpaque(false);
 
                 swingIcon.setContent(label);
-            });
+            });            
         }
     }
 }

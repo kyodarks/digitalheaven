@@ -30,15 +30,14 @@ public class LoginHandler extends Pane implements FormView{
     @FXML public Label invalidPasswordLabel;
 
     private FormInputGroup[] inputs;
-    private final String validateUserSQL;
+    private String validateUserSQL;
             
     private final PopupMessage infoMessage;
 
     public LoginHandler(){
         initUI();
-
-        validateUserSQL = 
-        "SELECT userid FROM users WHERE (username = ?) OR (email = ?) AND password = ?";
+        initQuerys();
+        
         infoMessage = new PopupMessage(this, "", 3);
 
         inputs = new FormInputGroup[]{
@@ -47,6 +46,10 @@ public class LoginHandler extends Pane implements FormView{
         };
 
         makeConnections();
+    }
+
+    private void initQuerys(){
+        validateUserSQL =  "SELECT userid FROM users WHERE (username = ?) OR (email = ?) AND password = ?";
     }
 
     public void makeConnections(){
