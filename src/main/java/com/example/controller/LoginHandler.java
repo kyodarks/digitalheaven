@@ -49,7 +49,7 @@ public class LoginHandler extends Pane implements FormView{
     }
 
     private void initQuerys(){
-        validateUserSQL =  "SELECT userid FROM users WHERE (username = ?) OR (email = ?) AND password = ?";
+        validateUserSQL =  "SELECT userid FROM users WHERE (username = ? OR email = ?) AND password = ?";
     }
 
     public void makeConnections(){

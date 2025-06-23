@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import com.example.App;
 import com.example.model.Event;
@@ -159,13 +158,6 @@ public class ProductRegister extends SubmenuView{
         successMessage.addOption("Ok", "", e->{
             successMessage.hide();
             if(onProductAdded != null){onProductAdded.call();}
-
-            icon.setImage(null);
-            Iterator<IconPreview> it = iconPreviews.iterator();
-            while(it.hasNext()){
-                IconPreview current = it.next();
-                iconPreviewContainer.getChildren().remove(current);
-            }
         });
 
         upload.setOnMouseClicked(e->{
@@ -230,16 +222,15 @@ public class ProductRegister extends SubmenuView{
         typeSelector.getSelectionModel().select(0);
         supplierSelector.getSelectionModel().select(0);
         productIcon = new ProductIcon();
+        iconPreviews.clear();
+        icon.setImage(null);
+
+        for (int i=1;i<iconPreviewContainer.getChildren().size();i++){
+            iconPreviewContainer.getChildren().remove(i);
+        }
 
         checkPriceInput();
         checkNameInput();
-        removeIconPreviews();
-    }
-
-    private void removeIconPreviews(){
-        for (IconPreview x : iconPreviews){
-            iconPreviewContainer.getChildren().remove(x);
-        }
     }
 
     private void checkPriceInput(){

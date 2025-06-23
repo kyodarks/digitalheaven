@@ -4,8 +4,11 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -17,10 +20,15 @@
             <Insets left="15.0" right="20.0" top="15.0" />
          </padding>
          <children>
-            <Pane prefHeight="200.0" prefWidth="200.0">
+            <StackPane prefHeight="165.0" prefWidth="165.0">
                <children>
-                  <Label layoutX="60.0" layoutY="93.0" text="appIcon" />
-               </children></Pane>
+                  <ImageView fitHeight="165.0" fitWidth="165.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../storage/app/logo.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </StackPane>
             <HBox fx:id="homeButton" alignment="CENTER_LEFT" layoutX="25.0" layoutY="225.0" prefHeight="32.0" prefWidth="200.0" spacing="15.0">
                <children>
                   <SwingNode fx:id="homeIcon" blendMode="DARKEN" />

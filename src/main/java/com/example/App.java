@@ -57,7 +57,7 @@ public class App extends Application {
     private static void makeConnections(){
         welcomeMessage.setOnFinished(e->{
             appContainer.setView(mainApplication);
-            mainApplication.enter();
+            mainApplication.enter(userid);
         });
     }
 
@@ -74,6 +74,7 @@ public class App extends Application {
         return userid;
     }
 
+    public static MainApplication getMainApplication(){return mainApplication;}
     public static Login getLoginController(){return login;}
     public static EmailSender getSender(){return emailSender;}
 

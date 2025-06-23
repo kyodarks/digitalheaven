@@ -5,4 +5,8 @@ public class Dashboard extends SubMenuController{
     public Dashboard(){
         initUI("Dashboard");
     }
+
+    public void setupUser(String userid){
+        
+    }
 }

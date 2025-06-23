@@ -5,6 +5,7 @@ import java.io.IOException;
 import com.example.App;
 import com.example.controller.ReturnButton;
 import com.example.controller.submenuView.SubmenuView;
+import com.example.model.SubMenuBehaviour;
 import com.example.utils.EasingStyle;
 
 import javafx.animation.KeyFrame;
@@ -14,7 +15,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 
-public abstract class SubMenuController extends StackPane{
+public abstract class SubMenuController extends StackPane implements SubMenuBehaviour{
     private Timeline selectAnimation;
     private ReturnButton returnButton;
 
@@ -78,5 +79,9 @@ public abstract class SubMenuController extends StackPane{
         try{
             loader.load();
         }catch (IOException e){}
+    }
+
+    public void onEnter(){
+        
     }
 }

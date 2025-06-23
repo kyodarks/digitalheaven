@@ -5,4 +5,8 @@ public class Admin extends SubMenuController{
     public Admin(){
         initUI("Admin");
     }
+
+    public void setupUser(String userid){
+        
+    }
 }

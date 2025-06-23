@@ -1,6 +1,7 @@
 package com.example.controller.submenu;
 
 import java.io.IOException;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -24,6 +25,7 @@ public class Shop extends SubMenuController {
     private ProductRegister productRegister;
     private ProductView productView;
 
+    private String registProductVisitSQL;
     private String getProductsSQL;
 
     public Shop() {
@@ -54,8 +56,16 @@ public class Shop extends SubMenuController {
                 productGrid.add(new GridItem(product));
 
                 product.setOnMouseClicked(e->{
-                    productView.setupProduct(product.getProductId());
-                    setView(productView);
+                    openProduct(product);
+                    
+                    try{
+                        PreparedStatement st = DataBase.getConnection()
+                            .prepareStatement(registProductVisitSQL);
+                        st.setString(1, App.getUser());
+                        st.setInt(2, id);
+
+                        st.executeUpdate();
+                    }catch(SQLException ex){}
                 });
 
                 current = result.next();
@@ -63,10 +73,19 @@ public class Shop extends SubMenuController {
         }catch(SQLException e){e.printStackTrace();}
     }
 
+    public void openProduct(Product product){
+        productView.setupProduct(product.getProductId());
+        setView(productView);
+    }
+
     private void initQuerys(){
         getProductsSQL = "SELECT p.productid, s.name AS suppliername, i.url AS icon, p.name, p.price, p.type \r\n" + //
                         "FROM product p JOIN supplier s ON p.supplierid = s.id\r\n" + //
                         "JOIN producticon i ON (i.productid = p.productid AND i.icon_index = 0 AND i.resolution = '150')";    
+        
+        registProductVisitSQL = "INSERT INTO productvisit (userid, productid)\r\n" + //
+                                "VALUES (?, ?) ON DUPLICATE KEY UPDATE\r\n" + //
+                                "date = CURRENT_TIMESTAMP";
     }
 
     private void makeConnections(){
@@ -94,5 +113,9 @@ public class Shop extends SubMenuController {
         if (newProductViewTrigger != null){
             productGrid.addStatic(newProductViewTrigger);
         }
+    }
+
+    public void setupUser(String userid){
+        
     }
 }

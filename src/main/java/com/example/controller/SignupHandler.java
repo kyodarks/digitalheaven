@@ -50,7 +50,7 @@ public class SignupHandler extends Pane implements FormView{
     private void initQuerys(){
         getUsersWithUserSQL = "SELECT userid FROM users WHERE username = ?";
         getUsersWithEmailSQL = "SELECT userid FROM users WHERE email = ?";
-        addUserSQL = "INSERT INTO users (username, password, email) VALUES(?, ?, ?)";
+        addUserSQL = "INSERT INTO users (username, displayname, password, email) VALUES(?, ?, ?, ?)";
     }
 
     private void init(){
@@ -139,8 +139,9 @@ public class SignupHandler extends Pane implements FormView{
             try{
                 PreparedStatement statement = DataBase.getConnection().prepareStatement(addUserSQL);
                 statement.setString(1, user);
-                statement.setString(2, password);
-                statement.setString(3, email);
+                statement.setString(2, user);
+                statement.setString(3, password);
+                statement.setString(4, email);
 
                 statement.executeUpdate();
             }catch(SQLException ex){}

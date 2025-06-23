@@ -121,6 +121,51 @@
     -fx-background-color : rgb(227, 180, 118);
 }
 
+
+.button-changepfp{
+    background-color : transparent;
+    border-color : #fdc886;
+    border-radius : 1.5em;
+
+    -fx-background-color : transparent;
+    -fx-border-color : #fdc886;
+    -fx-background-radius: 1.5em;
+    -fx-text-fill : #fdc886;
+    -fx-border-radius : 1.5em
+}
+
+.button-changepfp:hover{
+    background-color: #fdc886;
+    border-radius : 1.5em;
+
+    -fx-border-radius : 1.5em;
+    -fx-background-radius: 1.5em;
+    -fx-background-color : #fdc886;
+    -fx-text-fill : black;
+}
+
+.button-deleteaccount{
+    background-color : transparent;
+    border-color : #d1005e;
+    border-radius : .5em;
+
+    -fx-background-color : transparent;
+    -fx-border-color : #d1005e;
+    -fx-background-radius: .5em;
+    -fx-text-fill : #d1005e;
+    -fx-border-radius : .5em
+}
+
+.button-deleteaccount:hover{
+    background-color: #d1005e;
+    border-radius : .5em;
+
+    -fx-border-radius : .5em;
+    -fx-background-radius: .5em;
+    -fx-background-color : #d1005e;
+    -fx-text-fill : black;
+}
+
 .button-cancel{
     background-color : transparent;
     border-width : 1px;
@@ -364,6 +409,13 @@
 
     -fx-background-color : white;
     -fx-background-radius : 1.5em;
+}
+
+.profilepic-container{
+    background-color: lightgray;
+
+    -fx-background-color : lightgray;
+    -fx-background-radius : 100%
 }
 
 .scroll-pane{

@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
@@ -34,10 +35,14 @@ public class MainApplication extends Pane{
     private SubMenu[] submenus;
     private Timeline initAnimation;
 
-    private boolean firtsJoin;
+    private HashMap<String, SubMenu> submenuCatalog;
+
+    private String user;
+    private boolean firtJoin;
 
     public MainApplication(){
-        firtsJoin = true;
+        firtJoin = true;
+        submenuCatalog = new HashMap<>();
 
         initUI();
         initAnimation();
@@ -56,9 +61,12 @@ public class MainApplication extends Pane{
         );
     }
 
-    public void enter(){
+    public void enter(String userid){
+        user = userid;
+
         initAnimation.play();
-        if (firtsJoin){
+        if (firtJoin){
+            firtJoin = false;
             loadSubmenus();
         }
     }
@@ -85,6 +93,13 @@ public class MainApplication extends Pane{
             new SubMenu(this, new Admin(), "admin")
         };
 
+        submenuCatalog.put("home", submenus[0]);
+        submenuCatalog.put("shop", submenus[1]);
+        submenuCatalog.put("dashboard", submenus[2]);
+        submenuCatalog.put("history", submenus[3]);
+        submenuCatalog.put("profile", submenus[4]);
+        submenuCatalog.put("admin", submenus[5]);
+
         Rectangle clip = new Rectangle();
         clip.widthProperty().bind(submenuContainer.widthProperty());
         clip.heightProperty().bind(submenuContainer.heightProperty());
@@ -93,7 +108,9 @@ public class MainApplication extends Pane{
         submenuContainer.setClip(clip);
 
         for (SubMenu submenu : submenus){
+            submenu.getController().setupUser(user);
             submenu.button.setOnMouseClicked(e->{
+                submenu.getController().onEnter();
                 switchMenu(submenu);
             });
         }
@@ -109,6 +126,22 @@ public class MainApplication extends Pane{
         submenuContainer.getChildren().remove(view);
     }
     
+    public void gotoSubmenu(String submenu){
+        SubMenu x = submenuCatalog.get(submenu);
+        if (x != null){
+            switchMenu(x);
+        }
+    }
+
+    public SubMenuController getSubMenu(String submenu){
+        SubMenu x = submenuCatalog.get(submenu);
+        if (x != null){
+            return x.getController();
+        }
+
+        return null;
+    }
+
     private void switchMenu(SubMenu menu){
         if (menu == selectedSubmenu){return;}
 
@@ -171,18 +204,18 @@ public class MainApplication extends Pane{
         }
         
         private void initIcon(){
-            Platform.runLater(()->{
-                SwingUtilities.invokeLater(() ->{
-                    
-                });
-
+            SwingUtilities.invokeLater(()->{
                 icon = new FlatSVGIcon(
-                        "com/example/icons/"+name+".svg", 20, 20);
+                    "com/example/icons/"+name+".svg", 20, 20);
                 JLabel label = new JLabel(icon);
                 label.setOpaque(false);
 
-                swingIcon.setContent(label);
-            });            
+                Platform.runLater(() -> swingIcon.setContent(label));
+            });
+        }
+    
+        public SubMenuController getController(){
+            return controller;
         }
     }
 }
