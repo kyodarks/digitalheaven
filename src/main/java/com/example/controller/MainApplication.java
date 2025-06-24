@@ -18,6 +18,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -30,6 +31,7 @@ public class MainApplication extends Pane{
     @FXML private SwingNode profileIcon;
     @FXML private Label profileLabel;
     @FXML private Pane submenuContainer;
+    @FXML private Button logout;
 
     private SubMenu selectedSubmenu;
     private SubMenu[] submenus;
@@ -46,6 +48,7 @@ public class MainApplication extends Pane{
 
         initUI();
         initAnimation();
+        makeConnections();
     }
 
     private void initAnimation(){
@@ -69,6 +72,12 @@ public class MainApplication extends Pane{
             firtJoin = false;
             loadSubmenus();
         }
+        
+        for (SubMenu submenu : submenus){
+            submenu.getController().setupUser(user);
+        }
+
+        switchMenu(submenus[0]);
     }
 
     private void initUI(){
@@ -108,7 +117,6 @@ public class MainApplication extends Pane{
         submenuContainer.setClip(clip);
 
         for (SubMenu submenu : submenus){
-            submenu.getController().setupUser(user);
             submenu.button.setOnMouseClicked(e->{
                 submenu.getController().onEnter();
                 switchMenu(submenu);
@@ -116,6 +124,12 @@ public class MainApplication extends Pane{
         }
 
         switchMenu(submenus[0]);
+    }
+
+    private void makeConnections(){
+        logout.setOnMouseClicked(e->{
+            App.logout();
+        });
     }
 
     public void setView(Node view){

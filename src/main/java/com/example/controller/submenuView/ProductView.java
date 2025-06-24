@@ -6,7 +6,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.example.App;
+import com.example.controller.MainApplication;
 import com.example.controller.Product;
+import com.example.controller.submenu.History;
 import com.example.utils.DataBase;
 import com.example.utils.DoubleToCop;
 import com.example.utils.Grid;
@@ -60,7 +62,7 @@ public class ProductView extends SubmenuView{
     private String addFavoriteSQL;
     private String removeFavoriteSQL;
     private String addSellSQL;
-
+    private String registProductVisitSQL;
     private int currentProduct;
     private double productBasePrice;
 
@@ -97,12 +99,18 @@ public class ProductView extends SubmenuView{
             loadProductInfo(info);
             loadSubIcons(icons);
 
+            PreparedStatement st = DataBase.getConnection()
+                 .prepareStatement(registProductVisitSQL);
+            st.setString(1, App.getUser());
+            st.setInt(2, productId);
+            st.executeUpdate();
+             
             PreparedStatement similarstm = DataBase.getConnection()
                 .prepareStatement(similarProductsSQL);
             similarstm.setString(1, info.getString("type"));
             similarstm.setInt(2, productId);
-            loadSimilarProducts(similarstm.executeQuery());
 
+            loadSimilarProducts(similarstm.executeQuery());
         }catch(SQLException e){}
     }
 
@@ -225,6 +233,10 @@ public class ProductView extends SubmenuView{
         removeFavoriteSQL = "DELETE FROM favorite WHERE userid = ? AND productid = ?";
 
         addSellSQL = "INSERT INTO sell (product, userid, amount, total) VALUES (?, ?, ?, ?)";
+    
+         registProductVisitSQL = "INSERT INTO productvisit (userid, productid)\r\n" + //
+                                "VALUES (?, ?) ON DUPLICATE KEY UPDATE\r\n" + //
+                                "date = CURRENT_TIMESTAMP";
     }
     
     private void makeConnections(){
@@ -281,6 +293,11 @@ public class ProductView extends SubmenuView{
         });
         purchaseMessage.addOption("Cerrar", "", e->{
             purchaseMessage.hide();
+
+            MainApplication app = App.getMainApplication();
+            History history = (History) app.getSubMenu("history");
+            history.update();
+            app.gotoSubmenu("history");
         });
     }
 

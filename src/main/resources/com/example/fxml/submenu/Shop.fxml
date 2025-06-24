@@ -47,17 +47,7 @@
                                  <children>
                                     <HBox prefWidth="200.0" spacing="10.0">
                                        <children>
-                                          <Button minWidth="45.0" mnemonicParsing="false" text="All">
-                                             <styleClass>
-                                                <String fx:value="category-button" />
-                                                <String fx:value="semibold-text" />
-                                                <String fx:value="category-button-selected" />
-                                             </styleClass>
-                                             <cursor>
-                                                <Cursor fx:constant="HAND" />
-                                             </cursor>
-                                          </Button>
-                                          <Button layoutX="10.0" layoutY="10.0" minWidth="45.0" mnemonicParsing="false" text="Giftcard">
+                                          <Button fx:id="allCategory" minWidth="45.0" mnemonicParsing="false" text="All">
                                              <styleClass>
                                                 <String fx:value="category-button" />
                                                 <String fx:value="semibold-text" />
@@ -66,7 +56,7 @@
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
                                           </Button>
-                                          <Button layoutX="62.0" layoutY="10.0" minWidth="45.0" mnemonicParsing="false" text="Skin">
+                                          <Button fx:id="giftcardCategory" layoutX="10.0" layoutY="10.0" minWidth="45.0" mnemonicParsing="false" text="Giftcard">
                                              <styleClass>
                                                 <String fx:value="category-button" />
                                                 <String fx:value="semibold-text" />
@@ -75,7 +65,7 @@
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
                                           </Button>
-                                          <Button layoutX="114.0" layoutY="10.0" minWidth="45.0" mnemonicParsing="false" text="Product">
+                                          <Button fx:id="skinCategory" layoutX="62.0" layoutY="10.0" minWidth="45.0" mnemonicParsing="false" text="Skin">
                                              <styleClass>
                                                 <String fx:value="category-button" />
                                                 <String fx:value="semibold-text" />
@@ -84,7 +74,7 @@
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
                                           </Button>
-                                          <Button layoutX="166.0" layoutY="10.0" minWidth="45.0" mnemonicParsing="false" text="Licence">
+                                          <Button fx:id="productCategory" layoutX="114.0" layoutY="10.0" minWidth="45.0" mnemonicParsing="false" text="Product">
                                              <styleClass>
                                                 <String fx:value="category-button" />
                                                 <String fx:value="semibold-text" />
@@ -93,7 +83,16 @@
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
                                           </Button>
-                                          <Button layoutX="304.0" layoutY="10.0" minWidth="45.0" mnemonicParsing="false" text="Game">
+                                          <Button fx:id="licenceCategory" layoutX="166.0" layoutY="10.0" minWidth="45.0" mnemonicParsing="false" text="Licence">
+                                             <styleClass>
+                                                <String fx:value="category-button" />
+                                                <String fx:value="semibold-text" />
+                                             </styleClass>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </Button>
+                                          <Button fx:id="gameCategory" layoutX="304.0" layoutY="10.0" minWidth="45.0" mnemonicParsing="false" text="Game">
                                              <styleClass>
                                                 <String fx:value="category-button" />
                                                 <String fx:value="semibold-text" />

@@ -15,17 +15,24 @@ import com.example.utils.Grid.GridItem;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 
 public class Shop extends SubMenuController {
     @FXML private AnchorPane productHolder;
-    
+    @FXML private Button allCategory;
+    @FXML private Button giftcardCategory;
+    @FXML private Button skinCategory;
+    @FXML private Button productCategory;
+    @FXML private Button licenceCategory;
+    @FXML private Button gameCategory;
+
     private Grid productGrid;
     private GridItem newProductViewTrigger;
     private ProductRegister productRegister;
     private ProductView productView;
 
-    private String registProductVisitSQL;
+    private String getUserTypeSQL;
     private String getProductsSQL;
 
     public Shop() {
@@ -34,7 +41,7 @@ public class Shop extends SubMenuController {
         initComponents();
         makeConnections();
 
-        updateProducts();
+        //updateProducts();
     }
 
     private void updateProducts(){
@@ -57,15 +64,6 @@ public class Shop extends SubMenuController {
 
                 product.setOnMouseClicked(e->{
                     openProduct(product);
-                    
-                    try{
-                        PreparedStatement st = DataBase.getConnection()
-                            .prepareStatement(registProductVisitSQL);
-                        st.setString(1, App.getUser());
-                        st.setInt(2, id);
-
-                        st.executeUpdate();
-                    }catch(SQLException ex){}
                 });
 
                 current = result.next();
@@ -82,10 +80,8 @@ public class Shop extends SubMenuController {
         getProductsSQL = "SELECT p.productid, s.name AS suppliername, i.url AS icon, p.name, p.price, p.type \r\n" + //
                         "FROM product p JOIN supplier s ON p.supplierid = s.id\r\n" + //
                         "JOIN producticon i ON (i.productid = p.productid AND i.icon_index = 0 AND i.resolution = '150')";    
-        
-        registProductVisitSQL = "INSERT INTO productvisit (userid, productid)\r\n" + //
-                                "VALUES (?, ?) ON DUPLICATE KEY UPDATE\r\n" + //
-                                "date = CURRENT_TIMESTAMP";
+
+        getUserTypeSQL = "SELECT usertype FROM users WHERE userid = ?";
     }
 
     private void makeConnections(){
@@ -109,13 +105,85 @@ public class Shop extends SubMenuController {
             newProductViewTrigger = new GridItem(FXMLLoader.load(App.class.getResource(
                 "fxml/custom/NewProductButton.fxml")));
         }catch (IOException e){e.printStackTrace();}
+    
+        CategoryFilter.setGrid(productGrid);
+        CategoryFilter.add(allCategory, "all");
+        CategoryFilter.add(giftcardCategory, "Giftcard");
+        CategoryFilter.add(skinCategory, "Skin");
+        CategoryFilter.add(productCategory, "Product");
+        CategoryFilter.add(licenceCategory, "Licence");
+        CategoryFilter.add(gameCategory, "Game_Key");
 
-        if (newProductViewTrigger != null){
-            productGrid.addStatic(newProductViewTrigger);
-        }
+        CategoryFilter.select(allCategory, "all");
     }
 
     public void setupUser(String userid){
-        
+        productGrid.clear();
+        productGrid.removeStatic(newProductViewTrigger);
+
+        try{
+            PreparedStatement stm = DataBase.getConnection()
+                .prepareStatement(getUserTypeSQL);
+            stm.setString(1, userid);
+
+            ResultSet resutl = stm.executeQuery();
+
+            if (resutl.next()){
+                String usertype = resutl.getString(1);
+                if (usertype.equals("admin")){
+                    productGrid.addStatic(newProductViewTrigger);
+                }
+            }
+        }catch(SQLException e){}
+
+        updateProducts();
+    }
+
+    private static class CategoryFilter{
+        private static Button selectedCategory;
+        private static Grid grid;
+
+        public static void add(Button trigger, String categoryName){
+            trigger.setOnMouseClicked(e->{
+                if (trigger == selectedCategory){return;}
+                deselectCurrent();
+                
+                selectedCategory = trigger;
+                selectedCategory.getStyleClass().add("category-button-selected");
+
+                filter(categoryName);
+            });
+        }
+
+        public static void select(Button trigger, String categoryName){
+            deselectCurrent();
+            selectedCategory = trigger;
+            selectedCategory.getStyleClass().add("category-button-selected");
+        }
+
+        public static void setGrid(Grid grid){
+            CategoryFilter.grid = grid;
+        }
+
+        private static void deselectCurrent(){
+            if (selectedCategory != null){
+                selectedCategory.getStyleClass().remove("category-button-selected");
+            }
+        }
+
+        private static void filter(String category){
+            for (GridItem x : grid.getItems()){
+                if (category.equals("all")){x.show(); continue;}
+
+                Product a = (Product) x.getNode();
+                if (!a.getType().equals(category)){
+                    x.hide();
+                }else{
+                    x.show();
+                }
+            }
+
+            grid.update();
+        }
     }
 }

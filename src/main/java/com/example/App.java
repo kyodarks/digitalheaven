@@ -68,6 +68,10 @@ public class App extends Application {
         App.userid = userid;
     }
 
+    public static void logout(){
+        appContainer.setView(login);
+    }
+
     public static Stage getStage(){return stage;}
 
     public static String getUser(){

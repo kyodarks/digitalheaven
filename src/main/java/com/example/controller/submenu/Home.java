@@ -42,14 +42,11 @@ public class Home extends SubMenuController{
     private Grid recentProductsGrid;
 
     private String user;
-    private String lastPfpLoaded;
 
     public Home(){
         initUI("Home");
         initQuerys();
         initComponents();
-
-        lastPfpLoaded = "";
     }
 
     private void initQuerys(){
@@ -149,8 +146,6 @@ public class Home extends SubMenuController{
         }
 
         String pfpPath = userData.getString("profilepic");
-        if (lastPfpLoaded.equals(pfpPath)){return;}
-        lastPfpLoaded = pfpPath;
         pfp.setImage(ImageScalator.scale(
                 new Image(pfpPath), 60));
     }

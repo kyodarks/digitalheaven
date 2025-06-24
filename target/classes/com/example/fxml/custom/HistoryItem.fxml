@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+
+<fx:root alignment="CENTER_LEFT" maxWidth="-Infinity" prefHeight="140.0" prefWidth="741.0" style="-fx-background-radius: 1.5em;" styleClass="container" stylesheets="@../../css/theme.css" type="HBox" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane fx:id="iconContainer" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="130.0" prefWidth="130.0" style="-fx-background-color: black; -fx-background-radius: 8%;">
+         <HBox.margin>
+            <Insets left="5.0" />
+         </HBox.margin>
+         <children>
+            <ImageView fx:id="icon" fitHeight="130.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </Pane>
+      <Label fx:id="productName" alignment="TOP_LEFT" prefHeight="120.0" prefWidth="188.0" style="-fx-font-size: 20px;" text="Product Name" wrapText="true">
+         <HBox.margin>
+            <Insets left="8.0" />
+         </HBox.margin>
+      </Label>
+      <Label fx:id="amount" alignment="CENTER" layoutX="140.0" layoutY="20.0" prefHeight="20.0" prefWidth="59.0" style="-fx-font-size: 16px;" text="#8" wrapText="true" />
+      <Label fx:id="date" alignment="CENTER" layoutX="340.0" layoutY="70.0" prefHeight="20.0" prefWidth="199.0" style="-fx-font-size: 16px;" text="dd-mm-yy-hh-mm-ss" wrapText="true" />
+      <Label fx:id="spent" alignment="CENTER" layoutX="502.0" layoutY="70.0" prefHeight="24.0" prefWidth="146.0" style="-fx-font-size: 20px;" styleClass="bold-text" text="\%999999" textFill="#40bf24" wrapText="true" />
+   </children>
+   <effect>
+      <DropShadow offsetX="2.0" offsetY="3.0">
+         <color>
+            <Color opacity="0.18237079679965973" />
+         </color>
+      </DropShadow>
+   </effect>
+</fx:root>

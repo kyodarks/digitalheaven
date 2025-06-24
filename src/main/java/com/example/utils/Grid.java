@@ -77,6 +77,16 @@ public class Grid {
         //});
     }
 
+    public void setItemGap(double x, double y){
+        itemGap = new Vector2(x, y);
+        update();
+    }
+
+    public void setItemSize(double x, double y){
+        itemSize = new Vector2(x, y);
+        update();
+    }
+
     public void add(GridItem newItem){
         container.getChildren().add(newItem.getNode());
         items.add(newItem);
@@ -105,7 +115,11 @@ public class Grid {
         update();
     }
 
-    private void update(){
+    public ArrayList<GridItem> getItems(){
+        return items;
+    }
+
+    public void update(){
         calcPositions();
         draw();
     }
@@ -230,7 +244,6 @@ public class Grid {
 
             positionAnimation.play();
         }
-
         public Node getNode(){return item;}
 
         public boolean isHidden(){return hidden;}
